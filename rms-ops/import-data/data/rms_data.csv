@@ -1,0 +1,15 @@
+Id,UserName,Email,FirstName,ContactNumber,Department,HrmEmployeeId,PositionName,SkillLevel,YearOfExperience,IsMain,SkillName
+2,Thanh Tran,,Thanh Tran,,Depart 1,2,IT staff,,2,,Java
+2,Thanh Tran,,Thanh Tran,,Depart 1,2,IT staff,,2,,CSS
+2,Thanh Tran,,Thanh Tran,,Depart 1,2,IT staff,,2,,Python
+5,Quan Le,,Quan Le,,Depart 1,5,CEO,,3,,C++
+8,Anh Nguyen,,Anh Nguyen,,Depart 1,8,CEO,,5,,Javascript
+6,Anh Pham,,Anh Pham,,Depart 1,6,CEO,,1,,Java
+6,Anh Pham,,Anh Pham,,Depart 1,6,CEO,,1,,CSS
+6,Anh Pham,,Anh Pham,,Depart 1,6,CEO,,1,,Python
+4,Phung Dao,,Phung Dao,,Depart 1,4,IT staff,,2,,C++
+1,Cuc Nguyen,,Cuc Nguyen,,Depart 2,1,IT staff,,3,,Javascript
+1,Cuc Nguyen,,Cuc Nguyen,,Depart 2,1,IT staff,,3,,Java
+3,Nguyen Hai,,Nguyen Hai,,Depart 2,3,CEO,,5,,CSS
+9,Tai Huynh,,Tai Huynh,,Depart 2,9,CEO,,1,,Python
+7,Nhan Tran,,Nhan Tran,,Depart 2,7,CEO,,0,,C++

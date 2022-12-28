@@ -1,0 +1,58 @@
+version: "3"
+services:
+  nginx:
+    container_name: rms_gateway_prod
+    restart: unless-stopped
+    image: tts.registry.jetbrains.space/p/rms/rms-gateway/rms-gateway-nginx:latest
+    ports:
+      - ${GATEWAY_PORT}:80
+    env_file:
+      - .env
+    networks:
+      - gateway-service
+      - rms
+      - rabbit-message
+    depends_on:
+      - casdoor
+  casdoor:
+    container_name: casdoor_prod
+    restart: always
+    image: tts.registry.jetbrains.space/p/rms/rms-casdoor/casdoor-custom:latest
+    ports:
+      - ${CASDOOR_PORT}:8000
+    entrypoint: /bin/sh -c './server --createDatabase=true'
+    depends_on:
+      - db
+    environment:
+      RUNNING_IN_DOCKER: "true"
+    volumes:
+      - ./conf:/conf/
+    networks:
+      - gateway-service
+      - rabbit-message
+  db:
+    container_name: casdoor_db_prod
+    restart: always
+    image: mysql:8.0.25
+    platform: linux/amd64
+    ports:
+      - ${CASDOOR_DB_PORT}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+    networks:
+      - gateway-service
+
+networks:
+  gateway-service:
+    driver: bridge
+    name: gateway-service
+  rms:
+    external: true
+    name: rms-network
+  rabbit-message:
+    external: true
+    name: rabbit-network

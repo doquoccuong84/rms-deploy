@@ -1,0 +1,19 @@
+db:
+    postgres:
+        host: timeline_db
+        port: 5432
+        user: root
+        password: '1234'
+        database: time_line
+client_url: http://localhost:3000,http://localhost:3001
+sentry:
+    dsn: 'https://732f939c0e7b44358fcbc910b22ae7d6@o4503963017609216.ingest.sentry.io/4503963023572992'
+    traceSampleRate: 0.0
+    maxBreadcrumbs: 50
+    sendDefaultPii: '1' # '0' - false, '1' - true
+rabbitmq:
+    queueName: resource-queue
+    host: rabbitmq_dev
+    port: 5672
+    user: admin
+    password: admin

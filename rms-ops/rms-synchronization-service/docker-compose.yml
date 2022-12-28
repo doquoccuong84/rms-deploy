@@ -1,0 +1,80 @@
+version: '3'
+services:
+  synchronization_db:
+    image: postgres:14-alpine
+    container_name: synchronization_db_prod
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - ./.docker/postgres_data_host:/var/lib/postgresql/data
+    networks:
+      - synchronization
+    restart: always
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'pg_isready',
+          '-U',
+          'root',
+          '-d',
+          '${DB_NAME}'
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+  synchronization_flyway:
+    image: flyway/flyway
+    container_name: synchronization_flyway_prod
+    command: -url=jdbc:postgresql://synchronization_db_prod/${DB_NAME} -user=${DB_USERNAME} -password=${DB_PASSWORD} -mixed="true" -connectRetries=60 migrate
+    volumes:
+      - './sql:/flyway/sql'
+    networks:
+      - synchronization
+    depends_on:
+      - synchronization_db
+  synchronization_api:
+    image: ${API_CONTAINER_REGISTRY}/${API_IMAGE_NAME}:${API_VERSION}
+    container_name: synchronization_api_prod
+    env_file:
+      - ./config/config.production.yaml
+    ports:
+      - ${API_PORT}:4000
+    depends_on:
+      - synchronization_db
+    volumes:
+      - ./config:/app/config
+    networks:
+      - synchronization
+      - rabbit-message
+    restart: always
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    volumes:
+      - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
+    mem_limit: ${API_MEM_LIMIT}
+    cpus: ${API_CPUS}
+    ports:
+      - ${RABBITMQ_PORT}:5672
+      - ${RABBITMQ_DASHBOARD_PORT}:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - rabbit-message
+      - synchronization
+networks:
+  synchronization:
+    external: false
+    name: synchronization-network
+  rabbit-message:
+    external: false
+    name: rabbit-network

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  rms-portal:
+    container_name: rms-portal
+    image: ${API_CONTAINER_REGISTRY}/${API_IMAGE_NAME}:${API_VERSION}
+    ports:
+      - ${PORTAL_PORT}:80
+    env_file:
+      - ./.env.production
+    environment:
+      NODE_ENV: production
+    restart: always
+

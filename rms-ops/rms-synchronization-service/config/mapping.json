@@ -1,0 +1,13 @@
+{
+	"hrmName": "casdoor",
+	"mapping": {
+		"uuid": "id",
+		"username": "name",
+		"displayName": "displayName",
+		"yearsOfExperience": "",
+		"email": "email",
+		"phoneNumber": "phone",
+		"avatar": "avatar",
+		"others": {}
+	}
+}

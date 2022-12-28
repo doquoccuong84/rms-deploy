@@ -1,0 +1,26 @@
+db:
+    postgres:
+        host: synchronization_db_prod
+        port: 5432
+        user: root
+        password: '1234'
+        database: time_line
+sentry:
+    dsn: 'https://732f939c0e7b44358fcbc910b22ae7d6@o4503963017609216.ingest.sentry.io/4503963023572992'
+    traceSampleRate: 0.0
+    maxBreadcrumbs: 50
+    sendDefaultPii: '1' # '0' - false, '1' - true
+rabbitmq:
+    queueName: resource-queue
+    host: rabbitmq
+    port: 5672
+    user: admin
+    password: admin
+hrm:
+    name: casdoor
+    syncApi: http://casdoor_prod:8000/api/get-users?owner=tpp
+    token:
+        name: Authorization
+        value: Bearer 0123456789
+resourceSync:
+    messageLength: 10

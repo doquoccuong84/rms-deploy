@@ -1,0 +1,131 @@
+ALTER TABLE Timesheets
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE HardSkills
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Departments
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Users
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Projects
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Resources
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Resources_HardSkills
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Timesheets_Resources_Projects
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Attributes
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Sections
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Templates
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Values
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE AvailableValues
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Sections_Attributes
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Templates_Sections
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Resources_Roles
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE Roles
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE projecttypes 
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE headcount  
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE headcount_hardskill  
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+ALTER TABLE headcount_resource 
+ALTER COLUMN created_at TYPE TIMESTAMP;
+
+-- Alter updated_at 
+
+ALTER TABLE Timesheets
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE HardSkills
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Departments
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Users
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Projects
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Resources
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Resources_HardSkills
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Timesheets_Resources_Projects
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Attributes
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Sections
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Templates
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Values
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE AvailableValues
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Sections_Attributes
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Templates_Sections
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Resources_Roles
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE Roles
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE projecttypes 
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE projectsaudit 
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE headcount  
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE headcount_hardskill  
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+
+ALTER TABLE headcount_resource 
+ALTER COLUMN updated_at TYPE TIMESTAMP;
+

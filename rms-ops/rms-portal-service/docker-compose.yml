@@ -1,0 +1,68 @@
+version: '3'
+services:
+  timeline_db:
+    image: postgres:14-alpine
+    container_name: timeline_db_prod
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - ./.docker/postgres_data_host:/var/lib/postgresql/data
+    networks:
+      - rms
+    restart: always
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'pg_isready',
+          '-U',
+          'root',
+          '-d',
+          '${DB_NAME}'
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+  flyway:
+    image: flyway/flyway:9.3.1-alpine
+    container_name: flyway_prod
+    command: -url=jdbc:postgresql://timeline_db_prod/${DB_NAME} -user=${DB_USERNAME} -password=${DB_PASSWORD} -mixed="true" -connectRetries=60 migrate
+    volumes:
+      - './sql:/flyway/sql'
+    networks:
+      - rms
+    depends_on:
+      - timeline_db
+      - rms_api
+  rms_api:
+    image: ${API_CONTAINER_REGISTRY}/${API_IMAGE_NAME}:${API_VERSION}
+    container_name: rms_api_prod
+    env_file:
+      - ./config/config.production.yaml
+    ports:
+      - ${API_PORT}:4000
+    volumes:
+      - ./config:/app/config
+      - rms_api_volume:/app/sql
+    depends_on:
+      - timeline_db
+    networks:
+      - rms
+      - rabbit-message
+    restart: always
+networks:
+  rms:
+    external: false
+    name: rms-network
+  rabbit-message:
+    external: true
+    name: rabbit-network  
+volumes:
+  rms_api_volume:
+    external: false

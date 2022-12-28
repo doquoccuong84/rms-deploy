@@ -1,0 +1,18 @@
+version: '3'
+services:
+  import-resource-service:
+    image: tts.registry.jetbrains.space/p/rms/rms-import-data/rms-import-data:latest
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DB_USER=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=timeline_db_prod
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME}
+    networks:
+      - rms-network
+networks:
+  rms-network:
+    external: true
+    name: rms-network
